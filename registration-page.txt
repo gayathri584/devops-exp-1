@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100
+
+void xorOperation(char *dividend, char *divisor, int len) {
+    for (int i = 1; i < len; i++) {
+        dividend[i] = (dividend[i] == divisor[i]) ? '0' : '1';
+    }
+}
+
+void crcEncode(char *data, char *generator, char *codeword) {
+    int dataLen = strlen(data);
+    int genLen = strlen(generator);
+    char dividend[MAX];
+    strcpy(dividend, data);
+    for (int i = 0; i < genLen - 1; i++) {
+        dividend[dataLen + i] = '0';
+    }
+    dividend[dataLen + genLen - 1] = '\0';
+    char temp[MAX];
+    strncpy(temp, dividend, genLen);
+    temp[genLen] = '\0';
+
+    for (int i = genLen; i <= dataLen + genLen - 1; i++) {
+        if (temp[0] == '1') {
+            xorOperation(temp, generator, genLen);
+        } else {
+            char zeroGen[MAX];
+            for (int j = 0; j < genLen; j++) zeroGen[j] = '0';
+            zeroGen[genLen] = '\0';
+            xorOperation(temp, zeroGen, genLen);
+        }
+
+        if (i < dataLen + genLen - 1) {
+            for (int j = 0; j < genLen - 1; j++) {
+                temp[j] = temp[j + 1];
+            }
+            temp[genLen - 1] = dividend[i];
+        }
+    }
+    strcpy(codeword, data);
+    strcat(codeword, temp + 1);
+}
+
+int main() {
+    char data[MAX], generator[MAX], codeword[MAX];
+    strcpy(data, "1101011011");
+    strcpy(generator, "10011");
+
+    crcEncode(data, generator, codeword);
+
+    printf("Original Data       : %s\n", data);
+    printf("Generator Polynomial: %s\n", generator);
+    printf("Transmitted Codeword: %s\n", codeword);
+
+    return 0;
+}
