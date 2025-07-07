@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        body
+        {
+            background-color: rgba(180, 180, 187, 0.821);
+        }
+        font 
+        {
+            color: rgb(95, 55, 55);
+            size: 6;
+            font: arial;
+        }
+        form
+        {
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <font>Registration Form</font>
+    </center>
+    <form>
+        First Name &nbsp;&nbsp;&nbsp;
+        <input type="text" id="firstname"/><br><br>
+        Last Name &nbsp;&nbsp;&nbsp;
+        <input type="text" id="lastname"/><br><br> 
+        Username &nbsp;&nbsp;&nbsp;
+        <input type="text" id="Username"/><br><br>
+        Mobile &nbsp;&nbsp;&nbsp;
+        <input type="tel" id="mobile"/><br><br>
+        Date of birth &nbsp;&nbsp;&nbsp;
+        <input type="date" id="Date of birth"/><br><br>
+        Gender &nbsp;&nbsp;&nbsp;
+        <input type="text" id="Gender"/><br><br>
+        Email &nbsp;&nbsp;&nbsp;
+        <input type="email" id="email"/><br><br>
+        Password &nbsp;&nbsp;&nbsp;
+        <input type="password" id="password"/><br><br>
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>
