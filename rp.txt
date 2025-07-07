@@ -1,45 +1,159 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Registration Form</title>
-    <style>
-        body
-        {
-            background-color: rgba(180, 180, 187, 0.821);
-        }
-        font 
-        {
-            color: rgb(95, 55, 55);
-            size: 6;
-            font: arial;
-        }
-        form
-        {
-            font-size: large;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Course Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f8;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .gender-group {
+      margin-top: 10px;
+    }
+    .gender-group input {
+      margin-right: 10px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4285f4;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3273dc;
+    }
+  </style>
 </head>
 <body>
-    <center>
-        <font>Registration Form</font>
-    </center>
-    <form>
-        First Name &nbsp;&nbsp;&nbsp;
-        <input type="text" id="firstname"/><br><br>
-        Last Name &nbsp;&nbsp;&nbsp;
-        <input type="text" id="lastname"/><br><br> 
-        Username &nbsp;&nbsp;&nbsp;
-        <input type="text" id="Username"/><br><br>
-        Mobile &nbsp;&nbsp;&nbsp;
-        <input type="tel" id="mobile"/><br><br>
-        Date of birth &nbsp;&nbsp;&nbsp;
-        <input type="date" id="Date of birth"/><br><br>
-        Gender &nbsp;&nbsp;&nbsp;
-        <input type="text" id="Gender"/><br><br>
-        Email &nbsp;&nbsp;&nbsp;
-        <input type="email" id="email"/><br><br>
-        Password &nbsp;&nbsp;&nbsp;
-        <input type="password" id="password"/><br><br>
-        <input type="submit" value="Submit"/>
-    </form>
+
+<div class="container">
+  <h2>Course Registration Form</h2>
+  <form id="registrationForm" onsubmit="return validateForm()">
+    
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" required>
+    
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="number">Mobile Number:</label>
+    <input type="text" id="number" required>
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" onchange="calculateAge()" required>
+    
+    <label for="age">Age:</label>
+    <input type="text" id="age" readonly>
+
+    <label for="state">State:</label>
+    <input type="text" id="state" required>
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" required>
+
+    
+    <label>Gender:</label>
+    <div class="gender-group">
+      <input type="radio" name="gender" value="Male" required> Male
+      <input type="radio" name="gender" value="Female"> Female
+      <input type="radio" name="gender" value="Other"> Other
+    </div>
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" required>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required>
+    
+    <label for="confirmpassword">Confirm Password:</label>
+    <input type="password" id="confirmpassword" required>
+    
+    <label for="course">Course Registration:</label>
+    <select id="course" required>
+      <option value="">--Select Course--</option>
+      <option value="Fullstack">Fullstack</option>
+      <option value="Mlops">MLops</option>
+      <option value="Devops">Devops</option>
+      <option value="CyberSecurity">CyberSecurity</option>
+      <option value="Blockchain">Blockchain</option>
+      <option value="Data Analyst">Data Analyst</option>
+    </select>
+
+    <button type="submit">Register</button>
+  </form>
+</div>
+
+<script>
+  function calculateAge() {
+    const dob = document.getElementById("dob").value;
+    const dobDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - dobDate.getFullYear();
+    const monthDiff = today.getMonth() - dobDate.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < dobDate.getDate())
+    ) {
+      age--;
+    }
+
+    document.getElementById("age").value = age;
+  }
+
+  function validateForm() {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmpassword").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return false;
+    }
+
+    alert("Registration successful!");
+    return true;
+  }
+</script>
+
 </body>
 </html>
